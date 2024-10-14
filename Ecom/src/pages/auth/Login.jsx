@@ -4,7 +4,7 @@ import { doc, setDoc, Timestamp } from 'firebase/firestore'; // Import Firestore
 import { useState, useContext } from 'react';
 import myContext from '/src/context/Data/MyContext';
 import { toast } from 'react-toastify';
-import Loader from '../../components/loader/Loader';
+import Loader from '../../components/Loader/Loader';
 import { useNavigate, Link } from 'react-router-dom';
 
 
