@@ -1,5 +1,4 @@
 import React from 'react'
-import { Nav } from 'react-bootstrap'
 import NavBar from '../Navbar/NavBar'
 import Footer from '../Footer/Footer'
 
