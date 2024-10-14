@@ -5,8 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['react-redux'],
-      external: ['@reduxjs/toolkit']
+      external: ['react-redux', '@reduxjs/toolkit']
     }
   }
 });
