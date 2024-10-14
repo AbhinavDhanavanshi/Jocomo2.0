@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import myContext from '../../../context/Data/MyContext';
 import Layout from '../../../components/Layout/Layout';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md'

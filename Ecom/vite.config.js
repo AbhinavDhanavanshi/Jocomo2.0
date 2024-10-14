@@ -11,6 +11,7 @@ export default defineConfig({
         'firebase/firestore',
         'react-toastify',
         'firebase/auth',
+        'react-tabs',
         'react-icons/fa'  // Add any other modules you encounter
       ]
     }
