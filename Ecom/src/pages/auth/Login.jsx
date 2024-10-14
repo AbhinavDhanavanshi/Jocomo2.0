@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'; 
-import { auth, fireDB } from '../../firebase/firebaseConfig'; // Import Firestore database (adjust path accordingly)
+import { auth, fireDB } from '../../firebase/FirebaseConfig'; // Import Firestore database (adjust path accordingly)
 import { doc, setDoc, Timestamp } from 'firebase/firestore'; // Import Firestore functions
 import { useState, useContext } from 'react';
 import myContext from '/src/context/Data/MyContext';
