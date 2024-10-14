@@ -13,7 +13,8 @@ export default defineConfig({
         'firebase/auth',
         'react-tabs',
         'react-icons/fa',
-        'react-icons'  // Add any other modules you encounter
+        'react-icons',
+        '@heroicons/react'  // Add any other modules you encounter
       ]
     }
   }
