@@ -3,9 +3,9 @@ import { Link, Route } from 'react-router-dom'
 import myContext from '../../context/Data/MyContext';
 import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, fireDB } from '../../firebase/firebaseConfig';
+import { auth, fireDB } from '../../firebase/FirebaseConfig';
 import { Timestamp, addDoc, collection } from 'firebase/firestore';
-import Loader from '../../components/loader/Loader';
+import Loader from '../../components/Loader/Loader';
 import Layout from '../../components/Layout/Layout';
 
 function Signup() {
