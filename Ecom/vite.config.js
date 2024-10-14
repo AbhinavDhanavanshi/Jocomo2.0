@@ -12,7 +12,8 @@ export default defineConfig({
         'react-toastify',
         'firebase/auth',
         'react-tabs',
-        'react-icons/fa'  // Add any other modules you encounter
+        'react-icons/fa',
+        'react-icons'  // Add any other modules you encounter
       ]
     }
   }
