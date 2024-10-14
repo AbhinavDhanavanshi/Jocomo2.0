@@ -10,7 +10,8 @@ export default defineConfig({
         '@reduxjs/toolkit',
         'firebase/firestore',
         'react-toastify',
-        'firebase/auth' // Add any other modules you encounter
+        'firebase/auth',
+        'react-icons/fa'  // Add any other modules you encounter
       ]
     }
   }
