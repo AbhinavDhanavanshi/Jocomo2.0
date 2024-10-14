@@ -5,7 +5,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['react-toastify', 'react-redux', '@reduxjs/toolkit']
+      external: [
+        'react-redux',
+        '@reduxjs/toolkit',
+        'firebase/firestore',
+        'react-toastify',
+        'firebase/auth' // Add any other modules you encounter
+      ]
     }
   }
 });
