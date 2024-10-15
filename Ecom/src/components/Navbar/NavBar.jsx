@@ -16,10 +16,14 @@ export default function Navbar() {
   const {mode, toggleMode } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const logout = async () => {
-    await signOut(auth);
-    localStorage.removeItem('user');
-    window.location.href = '/';
-  }
+    try {
+      await signOut(auth);
+      localStorage.removeItem('user');
+      window.location.href = '/';
+    } catch (error) {
+      console.error("Error during sign out:", error);
+    }
+  };
 
   const cartItems = useSelector((state) => state.cart)
 
