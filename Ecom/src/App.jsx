@@ -21,7 +21,7 @@ export default function App() {
   return (
     <MyState>
       <Router>
-        <Routes>
+        <Routes >
           <Route path='/' element={<Home />} />
           <Route path='/sell' element={
               <ProtectedRoute><SellDashboard /></ProtectedRoute>
@@ -37,7 +37,6 @@ export default function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/productinfo/:id' element={<ProductInfo />} />
-          <Route path='/cart' element={<Cart />} />
           <Route path='/addproduct' element={
             <ProtectedRouteForAdmin>
               <AddProduct />
