@@ -6,6 +6,7 @@ import { FiSun } from 'react-icons/fi'
 import MyContext from '../../context/Data/MyContext'
 import { RxCross2 } from 'react-icons/rx'
 import { useSelector } from 'react-redux'
+import {signOut} from 'firebase/auth'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -13,9 +14,10 @@ export default function Navbar() {
   const context = useContext(MyContext)
   const {mode, toggleMode } = context
   const user = JSON.parse(localStorage.getItem('user'));
-  const logout = () => {
-    localStorage.clear('user');
-    window.location.href = '/login';
+  const logout = async () => {
+    await signOut(auth);
+    localStorage.removeItem('user');
+    window.location.href = '/';
   }
 
   const cartItems = useSelector((state) => state.cart)
