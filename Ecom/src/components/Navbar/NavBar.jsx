@@ -7,7 +7,7 @@ import MyContext from '../../context/Data/MyContext'
 import { RxCross2 } from 'react-icons/rx'
 import { useSelector } from 'react-redux'
 import { signOut} from 'firebase/auth'
-import { getAuth } from '../../firebase/FirebaseConfig'
+import { auth } from '../../firebase/FirebaseConfig'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -16,7 +16,7 @@ export default function Navbar() {
   const {mode, toggleMode } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const logout = async () => {
-    await signOut(getAuth);
+    await signOut(auth);
     localStorage.removeItem('user');
     window.location.href = '/';
   }
