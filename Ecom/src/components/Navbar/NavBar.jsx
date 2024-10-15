@@ -82,7 +82,7 @@ export default function Navbar() {
                     All Products
                   </Link>
 
-                  {user?.email !== 'abhinavbbis@gmail.com' && (
+                  {user && user?.email !== 'abhinavbbis@gmail.com' && (
                     <div className="flow-root">
                       <Link
                         to="/sell"
