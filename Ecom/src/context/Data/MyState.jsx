@@ -41,20 +41,20 @@ const MyState = (props) => {
         ),
     });
 
-    const addProduct = async()=>{
-        if(products.title==null || products.price==null || products.imageUrl==null || products.category==null || products.description==null){
+    const addProduct = async(updatedProduct)=>{
+        if(updatedProduct.title==null || updatedProduct.price==null || updatedProduct.imageUrl==null || updatedProduct.category==null || updatedProduct.description==null){
             return toast.error("Please fill all the fields")
         }
 
         // check if number is 10 digits
-        if(products.ownerContact.length !== 10){
+        if(updatedProduct.ownerContact.length !== 10){
             return toast.error("Contact number must be 10 digits")
         }
         
         setLoading(true)
         try{
             const productRef = collection(fireDB, 'products')
-            await addDoc(productRef, products)
+            await addDoc(productRef, updatedProduct)
             toast.success('Product added successfully')
             getProductsData()
             // empty all fields and navigate to admin page
@@ -78,7 +78,7 @@ const MyState = (props) => {
                 ),
             })
             setTimeout(()=>{
-                window.location.href = 'dashboard'
+                window.location.href = '/sell'
             }, 1500)
             setLoading(false)
         }

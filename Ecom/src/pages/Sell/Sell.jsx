@@ -1,13 +1,37 @@
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import MyContext from "../../context/Data/MyContext";
 
 export default function Sell({ onClose }) {
   const context = useContext(MyContext);
   const { products, setProducts, addProduct } = context;
+  const categories = [
+    "Accessories",
+    "Beauty",
+    "Books",
+    "Cycles",
+    "Clothing",
+    "Decoration",
+    "Electronics",
+    "Furniture",
+    "Health",
+    "Stationery",
+    "Sports",
+    "Other",
+  ];
 
   // Retrieve the user's name from localStorage
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
   const userName = user ? user.name : "Unknown User"; // Fallback in case user is not available
+
+  // Updated addProduct to include ownerName directly in the function call
+  const handleAddProduct = () => {
+    // Pass the ownerName directly into the product object
+    const updatedProduct = { ...products, ownerName: userName };
+    addProduct(updatedProduct);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-gray-800 bg-opacity-30">
@@ -24,8 +48,10 @@ export default function Sell({ onClose }) {
         <div>
           <input
             type="text"
-            value={products.title}
-            onChange={(e) => setProducts({ ...products, title: e.target.value })}
+            value={products.title || ""}
+            onChange={(e) =>
+              setProducts({ ...products, title: e.target.value })
+            }
             name="title"
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
             placeholder="Product title"
@@ -34,8 +60,10 @@ export default function Sell({ onClose }) {
         <div>
           <input
             type="number"
-            value={products.price}
-            onChange={(e) => setProducts({ ...products, price: e.target.value })}
+            value={products.price || ""}
+            onChange={(e) =>
+              setProducts({ ...products, price: e.target.value })
+            }
             name="price"
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
             placeholder="Product price"
@@ -44,7 +72,7 @@ export default function Sell({ onClose }) {
         <div>
           <input
             type="url"
-            value={products.imageUrl}
+            value={products.imageUrl || ""}
             onChange={(e) =>
               setProducts({ ...products, imageUrl: e.target.value })
             }
@@ -54,16 +82,23 @@ export default function Sell({ onClose }) {
           />
         </div>
         <div>
-          <input
-            type="text"
-            value={products.category}
+          <select
+            value={products.category || ""}
             onChange={(e) =>
               setProducts({ ...products, category: e.target.value })
             }
             name="category"
-            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
-            placeholder="Product category"
-          />
+            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white outline-none"
+          >
+            <option value="" disabled selected hidden>
+              Select Category
+            </option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Owner Name field, auto-filled and non-editable */}
@@ -80,7 +115,7 @@ export default function Sell({ onClose }) {
         <div>
           <input
             type="number"
-            value={products.ownerContact}
+            value={products.ownerContact || ""}
             onChange={(e) =>
               setProducts({ ...products, ownerContact: e.target.value })
             }
@@ -94,7 +129,7 @@ export default function Sell({ onClose }) {
             cols="30"
             rows="10"
             name="description"
-            value={products.description}
+            value={products.description || ""}
             onChange={(e) =>
               setProducts({ ...products, description: e.target.value })
             }
@@ -104,7 +139,7 @@ export default function Sell({ onClose }) {
         </div>
         <div className="flex justify-center mb-3">
           <button
-            onClick={addProduct}
+            onClick={handleAddProduct}
             className="bg-yellow-500 w-full text-black font-bold px-2 py-2 rounded-lg"
           >
             Add Product
