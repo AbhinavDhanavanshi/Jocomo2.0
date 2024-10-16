@@ -54,7 +54,7 @@ function ProductCard() {
                                             className="flex justify-center cursor-pointer"
                                         >
                                             <img
-                                                className="rounded-2xl w-full h-52 p-1 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+                                                className="rounded-2xl w-full h-52 p-2 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
                                                 src={imageUrl}
                                                 alt="product"
                                                 style={{ objectFit: 'cover' }}  
@@ -83,7 +83,7 @@ function ProductCard() {
                                                 <button
                                                     onClick={() => addCart(item)}
                                                     type="button"
-                                                    className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-1"
+                                                    className="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
                                                 >
                                                     Add To Cart
                                                 </button>

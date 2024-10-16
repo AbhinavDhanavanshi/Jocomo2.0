@@ -10,9 +10,8 @@ function ProductCard() {
   const context = useContext(myContext);
   const { mode, product } = context;
   const user = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user")).name
-  : null;
-
+    ? JSON.parse(localStorage.getItem("user")).name
+    : null;
 
   const [sellOn, setSellOn] = useState(false);
 
@@ -29,35 +28,34 @@ function ProductCard() {
 
   const updateProductSell = () => {
     setUpdateOn(true);
-  }
+  };
   const closeUpdateSell = () => {
     setUpdateOn(false);
-  }
+  };
 
   return (
     <Layout>
-      <section
-        className={`text-gray-600 body-font ${sellOn ? "blur-sm" : ""}`}
-      >
+      <section className={`text-gray-600 body-font ${sellOn ? "blur-sm" : ""}`}>
         <div className="container px-5 py-8 md:py-16 mx-auto">
           {/* Flex container for Your Products and Add Product button */}
-          <div className="lg:w-1/2 w-full mb-6 lg:mb-10 group flex items-center justify-between">
-            <h1
-              className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
-              style={{ color: mode === "dark" ? "white" : "" }}
-            >
-              Your Products
-            </h1>
-            <button
-              onClick={addProductSale}
-              type="button"
-              className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm py-2 px-4"
-            >
-              Add Product
-            </button>
+          <div className="lg:w-full w-full mb-6 lg:mb-10 group">
+            <div className="lg:w-full w-full mb-2 lg:mb-2 flex justify-between items-center group">
+              <h1
+                className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
+                style={{ color: mode === "dark" ? "white" : "" }}
+              >
+                Your Products
+              </h1>
+              <button
+                onClick={addProductSale}
+                type="button"
+                className="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 hover:scale-105 transition-all ease-in-out focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-40 py-2"
+              >
+                Add Product
+              </button>
+            </div>
+            <div className="h-1 w-1/6 bg-blue-500 rounded transition-all duration-3 group-hover:w-full"></div>
           </div>
-          {/* Line below Your Products */}
-          <div className="h-1 w-20 bg-blue-500 rounded transition-all duration-300 group-hover:w-1/2 mb-6"></div>
 
           <div className="flex flex-wrap -m-4">
             {product.map((item, index) => {
@@ -108,11 +106,11 @@ function ProductCard() {
                       <div className="flex justify-center">
                         <button
                           onClick={() => {
-                            updateProductSell()
-                            setCurrentProduct(item)
+                            updateProductSell();
+                            setCurrentProduct(item);
                           }}
                           type="button"
-                          className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
+                          className="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
                         >
                           Update Details
                         </button>
@@ -125,7 +123,12 @@ function ProductCard() {
           </div>
         </div>
       </section>
-      {updateOn && <UpdateProduct onClose={closeUpdateSell} selectedProduct={currentProduct} />}
+      {updateOn && (
+        <UpdateProduct
+          onClose={closeUpdateSell}
+          selectedProduct={currentProduct}
+        />
+      )}
       {sellOn && <Sell onClose={closeSell} />}
     </Layout>
   );

@@ -144,12 +144,12 @@ export default function Sell({ onClose }) {
             placeholder="Product Description"
           ></textarea>
         </div>
-        <div className="flex justify-center mb-3">
+        <div className="flex justify-center mb-3 group">
           <button
             onClick={handleAddProduct}
-            className="bg-yellow-500 w-full text-black font-bold px-2 py-2 rounded-lg"
+            className="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 group-hover:scale-105 transition-all ease-in-out 3s focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
           >
-            Add Product
+            Add
           </button>
         </div>
       </div>
