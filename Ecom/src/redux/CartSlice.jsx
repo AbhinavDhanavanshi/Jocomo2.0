@@ -9,7 +9,6 @@ const cartSlice = createSlice({
     reducers: {
         addToCart(state, action) {
             state.push(action.payload);
-            toast.success(`${action.payload.name} added to cart!`);
             localStorage.setItem('cart', JSON.stringify(state)); // Update localStorage
         },
         deleteFromCart(state, action) {

@@ -41,7 +41,14 @@ function UpdateProduct({ onClose, selectedProduct }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-gray-800 bg-opacity-30">
-      <div className="relative bg-gray-800 px-10 py-10 rounded-xl w-full max-w-md">
+      <div
+        className="relative bg-gray-800 px-10 py-10 rounded-xl w-full max-w-md"
+        style={{
+          maxHeight: "90vh", // Ensure the modal doesn't exceed 90% of the viewport height
+          overflowY: "auto",
+          scrollbarWidth: "none",
+        }}
+      >
         <button
           className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-gray-400"
           onClick={onClose}
@@ -99,13 +106,24 @@ function UpdateProduct({ onClose, selectedProduct }) {
             <option value="" disabled hidden>
               Select Category
             </option>
-            {["Accessories", "Beauty", "Books", "Cycles", "Clothing", "Decoration", "Electronics", "Furniture", "Health", "Stationery", "Sports", "Other"].map(
-              (category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              )
-            )}
+            {[
+              "Accessories",
+              "Beauty",
+              "Books",
+              "Cycles",
+              "Clothing",
+              "Decoration",
+              "Electronics",
+              "Furniture",
+              "Health",
+              "Stationery",
+              "Sports",
+              "Other",
+            ].map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -124,7 +142,10 @@ function UpdateProduct({ onClose, selectedProduct }) {
             type="number"
             value={updatedProduct.ownerContact || ""}
             onChange={(e) =>
-              setUpdatedProduct({ ...updatedProduct, ownerContact: e.target.value })
+              setUpdatedProduct({
+                ...updatedProduct,
+                ownerContact: e.target.value,
+              })
             }
             name="OwnerContact"
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
@@ -138,14 +159,17 @@ function UpdateProduct({ onClose, selectedProduct }) {
             name="description"
             value={updatedProduct.description || ""}
             onChange={(e) =>
-              setUpdatedProduct({ ...updatedProduct, description: e.target.value })
+              setUpdatedProduct({
+                ...updatedProduct,
+                description: e.target.value,
+              })
             }
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
             placeholder="Product Description"
           ></textarea>
         </div>
         <div className="flex justify-center mb-3">
-          <button
+        <button
             onClick={handleUpdateProduct}
             className="bg-yellow-500 w-full text-black font-bold px-2 py-2 rounded-lg"
           >

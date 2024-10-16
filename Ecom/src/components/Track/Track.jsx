@@ -1,25 +1,55 @@
 import React, { useContext } from "react";
 import myContext from "../../context/Data/MyContext";
+import Slider from "react-slick";
 
 function Track() {
   const context = useContext(myContext);
   const { mode } = context;
 
+//   const arrowColor = mode === "dark" ? "white" : "black"; // Set arrow color based on mode
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1300,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 790,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 md:py-5 mx-auto">
-          <div className="flex flex-wrap -m-4 text-center">
-            <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
+          <Slider {...settings}>
+            <div className="p-4 flex justify-center">
+              {" "}
+              {/* Center alignment for items */}
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg"
+                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center" // Added flex and items-center
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
                 }}
               >
                 <svg
-                  className="text-blue-500 w-12 h-12 mb-3 inline-block"
+                  className="text-blue-500 w-12 h-12 mb-3"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -38,15 +68,17 @@ function Track() {
                 >
                   Your Marketplace
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
+                  {" "}
+                  {/* Added text-center */}
                   Buy and Sell products with your college mates
                 </p>
               </div>
             </div>
 
-            <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
+            <div className="p-4 flex justify-center">
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 px-4 py-4 rounded-lg"
+                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center"
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
@@ -58,7 +90,7 @@ function Track() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="text-blue-500 w-12 h-12 mb-3 inline-block"
+                  className="text-blue-500 w-12 h-12 mb-3"
                 >
                   <path
                     strokeLinecap="round"
@@ -72,15 +104,15 @@ function Track() {
                 >
                   Sellers
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap">
-                  Get Sellers contact details and get your order
+                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
+                    Get Sellers contact details and get your order
                 </p>
               </div>
             </div>
 
-            <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
+            <div className="p-4 flex justify-center">
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg"
+                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center"
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
@@ -92,7 +124,7 @@ function Track() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="text-blue-500 w-12 h-12 mb-3 inline-block"
+                  className="text-blue-500 w-12 h-12 mb-3"
                 >
                   <path
                     strokeLinecap="round"
@@ -106,12 +138,12 @@ function Track() {
                 >
                   Advertisements
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
                   Advertise your products and get more customers
                 </p>
               </div>
             </div>
-          </div>
+          </Slider>
         </div>
       </section>
     </div>

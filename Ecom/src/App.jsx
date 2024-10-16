@@ -13,7 +13,8 @@ import ProductInfo from './pages/productinfo/ProductInfo';
 import AddProduct from './pages/admin/page/AddProduct';
 import UpdateProduct from './pages/Sell/UpdateProduct';
 import { ToastContainer, toast } from 'react-toastify';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css'; 
 
 

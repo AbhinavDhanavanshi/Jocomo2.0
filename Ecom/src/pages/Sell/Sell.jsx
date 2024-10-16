@@ -34,8 +34,15 @@ export default function Sell({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-gray-800 bg-opacity-30">
-      <div className="relative bg-gray-800 px-10 py-10 rounded-xl w-full max-w-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-gray-800 bg-opacity-30 overflow-auto">
+      <div
+        className="relative bg-gray-800 px-10 py-10 rounded-xl w-full max-w-md"
+        style={{
+          maxHeight: "90vh", // Ensure the modal doesn't exceed 90% of the viewport height
+          overflowY: "auto",
+          scrollbarWidth: "none", 
+        }}
+      >
         <button
           className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-gray-400"
           onClick={onClose}
