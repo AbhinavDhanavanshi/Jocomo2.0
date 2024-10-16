@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import myContext from "../../context/Data/MyContext";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Track() {
   const context = useContext(myContext);
