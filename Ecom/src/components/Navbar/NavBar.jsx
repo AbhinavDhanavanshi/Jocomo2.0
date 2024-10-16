@@ -1,27 +1,28 @@
-import { Fragment, useContext, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { Link } from 'react-router-dom';
-import { BsFillCloudSunFill } from 'react-icons/bs';
-import { FiSun } from 'react-icons/fi';
-import MyContext from '../../context/Data/MyContext';
-import { RxCross2 } from 'react-icons/rx';
-import { useSelector } from 'react-redux';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
+import { Fragment, useContext, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Link } from "react-router-dom";
+import { BsFillCloudSunFill } from "react-icons/bs";
+import { FiSun } from "react-icons/fi";
+import MyContext from "../../context/Data/MyContext";
+import { RxCross2 } from "react-icons/rx";
+import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/FirebaseConfig";
+import { BsCart } from "react-icons/bs";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const context = useContext(MyContext);
   const { mode, toggleMode } = context;
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   const logout = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem('user');
-      window.location.href = '/';
+      localStorage.removeItem("user");
+      window.location.href = "/";
     } catch (error) {
-      console.error('Error during sign out:', error);
+      console.error("Error during sign out:", error);
     }
   };
 
@@ -57,8 +58,8 @@ export default function Navbar() {
               <Dialog.Panel
                 className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl"
                 style={{
-                  backgroundColor: mode === 'dark' ? 'rgb(40, 44, 52)' : '',
-                  color: mode === 'dark' ? 'white' : '',
+                  backgroundColor: mode === "dark" ? "rgb(40, 44, 52)" : "",
+                  color: mode === "dark" ? "white" : "",
                 }}
               >
                 <div className="flex px-4 pb-2 pt-28">
@@ -76,30 +77,30 @@ export default function Navbar() {
                     to="/"
                     className="text-sm font-medium text-gray-900"
                     style={{
-                      color: mode === 'dark' ? 'white' : '',
+                      color: mode === "dark" ? "white" : "",
                     }}
                   >
                     All Products
                   </Link>
 
-                  {user && user?.email !== 'abhinavbbis@gmail.com' && (
+                  {user && user?.email !== "abhinavbbis@gmail.com" && (
                     <div className="flow-root">
                       <Link
                         to="/sell"
                         className="-m-2 block p-2 font-medium text-gray-900"
-                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         Sell
                       </Link>
                     </div>
                   )}
 
-                  {user?.email === 'abhinavbbis@gmail.com' && (
+                  {user?.email === "abhinavbbis@gmail.com" && (
                     <div className="flow-root">
                       <Link
                         to="/dashboard"
                         className="-m-2 block p-2 font-medium text-gray-900"
-                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         Admin
                       </Link>
@@ -112,7 +113,7 @@ export default function Navbar() {
                       <Link
                         to="/login"
                         className="text-sm font-medium text-gray-700"
-                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         Login
                       </Link>
@@ -120,14 +121,14 @@ export default function Navbar() {
                       <a
                         onClick={logout}
                         className="text-sm font-medium text-gray-700 cursor-pointer"
-                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         Logout
                       </a>
                     )}
                   </div>
 
-                  <div className="flow-root">
+                  {/* <div className="flow-root">
                     <Link
                       to="/"
                       className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
@@ -138,23 +139,17 @@ export default function Navbar() {
                         alt="Dan_Abromov"
                       />
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="#" className="-m-2 flex items-center p-2">
-                    <img
-                      src="img/indiaflag.png"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
+                  <a href="/" className="-m-2 flex items-center p-2">
                     <span
                       className="ml-3 block text-base font-medium text-gray-900"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       INDIA
                     </span>
-                    <span className="sr-only">, change currency</span>
                   </a>
                 </div>
               </Dialog.Panel>
@@ -168,8 +163,8 @@ export default function Navbar() {
         <p
           className="flex h-10 items-center justify-center bg-blue-500 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
           style={{
-            backgroundColor: mode === 'dark' ? 'rgb(40, 44, 52)' : '#3B82F6',
-            color: mode === 'dark' ? 'white' : '',
+            backgroundColor: mode === "dark" ? "rgb(40, 44, 52)" : "#3B82F6",
+            color: mode === "dark" ? "white" : "",
           }}
         >
           Free contact reveal till 30th November
@@ -179,8 +174,8 @@ export default function Navbar() {
           aria-label="Top"
           className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl"
           style={{
-            backgroundColor: mode === 'dark' ? '#393d4c' : '',
-            color: mode === 'dark' ? 'white' : '',
+            backgroundColor: mode === "dark" ? "#393d4c" : "",
+            color: mode === "dark" ? "white" : "",
           }}
         >
           <div className="">
@@ -190,8 +185,8 @@ export default function Navbar() {
                 className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
                 onClick={() => setOpen(true)}
                 style={{
-                  backgroundColor: mode === 'dark' ? 'rgb(80 82 87)' : '',
-                  color: mode === 'dark' ? 'white' : '',
+                  backgroundColor: mode === "dark" ? "rgb(80 82 87)" : "",
+                  color: mode === "dark" ? "white" : "",
                 }}
               >
                 <span className="sr-only">Open menu</span>
@@ -213,11 +208,11 @@ export default function Navbar() {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <Link to={'/'} className="flex">
+                <Link to={"/"} className="flex">
                   <div className="flex">
                     <h1
                       className="text-2xl font-bold text-black px-2 py-1 rounded"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       JOCOMA
                     </h1>
@@ -230,25 +225,25 @@ export default function Navbar() {
                   <Link
                     to="/"
                     className="text-sm font-medium text-gray-700"
-                    style={{ color: mode === 'dark' ? 'white' : '' }}
+                    style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     All Products
                   </Link>
-                  {user?.email !== 'abhinavbbis@gmail.com' && (
+                  {user?.email !== "abhinavbbis@gmail.com" && (
                     <Link
                       to="/sell"
                       className="text-sm font-medium text-gray-700"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Sell
                     </Link>
                   )}
 
-                  {user?.email === 'abhinavbbis@gmail.com' && (
+                  {user?.email === "abhinavbbis@gmail.com" && (
                     <Link
                       to="/dashboard"
                       className="text-sm font-medium text-gray-700"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Admin
                     </Link>
@@ -257,7 +252,7 @@ export default function Navbar() {
                     <Link
                       to="/login"
                       className="text-sm font-medium text-gray-700"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Login
                     </Link>
@@ -265,26 +260,22 @@ export default function Navbar() {
                     <a
                       onClick={logout}
                       className="text-sm font-medium text-gray-700 cursor-pointer"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Logout
                     </a>
                   )}
                 </div>
 
-                <span className="hidden lg:ml-8 lg:flex">
+                <span className="hidden lg:ml-2 lg:flex">
                   <a
-                    href="#"
+                    href="/"
                     className="flex items-center text-gray-700 hover:text-gray-800"
                   >
-                    <img
-                      src="img/indiaflag.png"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
+                    {/* india fla */}
                     <span
                       className="ml-3 block text-sm font-medium"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       INDIA
                     </span>
@@ -296,8 +287,24 @@ export default function Navbar() {
                   <BsFillCloudSunFill
                     onClick={toggleMode}
                     className="text-gray-700 h-6 w-6 cursor-pointer"
-                    style={{ color: mode === 'dark' ? 'white' : '' }}
+                    style={{ color: mode === "dark" ? "white" : "" }}
                   />
+                </div>
+
+                {/* Cart */}
+                <div className="ml-2 flex items-center space-x-6">
+                  <Link to="/cart" className="relative">
+                    <BsCart
+                      className="h-6 w-6"
+                      style={{ color: mode === "dark" ? "white" : "gray" }}
+                    />
+                    <span
+                      className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1"
+                      style={{ color: mode === "dark" ? "white" : "black" }}
+                    >
+                      {cartItems.length}
+                    </span>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,17 +1,23 @@
 import React, { useContext, useState } from "react";
 import myContext from "../../context/Data/MyContext";
+import { Link } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Sell from "./Sell";
+import UpdateProduct from "./UpdateProduct";
 import { toast } from "react-toastify";
 
 function ProductCard() {
   const context = useContext(myContext);
   const { mode, product } = context;
   const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user.name"))
-    : null;
+  ? JSON.parse(localStorage.getItem("user")).name
+  : null;
+
 
   const [sellOn, setSellOn] = useState(false);
+
+  const [currentProduct, setCurrentProduct] = useState({});
+  const [updateOn, setUpdateOn] = useState(false);
 
   const addProductSale = () => {
     setSellOn(true);
@@ -20,6 +26,13 @@ function ProductCard() {
   const closeSell = () => {
     setSellOn(false);
   };
+
+  const updateProductSell = () => {
+    setUpdateOn(true);
+  }
+  const closeUpdateSell = () => {
+    setUpdateOn(false);
+  }
 
   return (
     <Layout>
@@ -94,11 +107,14 @@ function ProductCard() {
                       </p>
                       <div className="flex justify-center">
                         <button
-                          onClick={() => addCart(item)}
+                          onClick={() => {
+                            updateProductSell()
+                            setCurrentProduct(item)
+                          }}
                           type="button"
                           className="focus:outline-none text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
                         >
-                          Add To Cart
+                          Update Details
                         </button>
                       </div>
                     </div>
@@ -109,7 +125,7 @@ function ProductCard() {
           </div>
         </div>
       </section>
-
+      {updateOn && <UpdateProduct onClose={closeUpdateSell} selectedProduct={currentProduct} />}
       {sellOn && <Sell onClose={closeSell} />}
     </Layout>
   );

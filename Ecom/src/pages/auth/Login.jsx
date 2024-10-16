@@ -105,7 +105,7 @@ function Login() {
                 <div className="flex justify-center mb-3">
                 <button
                     onClick={signInWithGoogle}
-                    className="bg-red-500 w-full text-white font-bold px-2 py-2 rounded-lg"
+                    className="bg-red-500 w-full text-white font-bold px-2 py-2 rounded-lg cursor-pointer"
                 >
                     Sign in with Google
                 </button>
@@ -114,9 +114,9 @@ function Login() {
                 <div>
                 <h2 className="text-white">
                     Don't have an account?{' '}
-                    <Link className="text-yellow-500 font-bold" to="/signup">
-                    Signup
-                    </Link>
+                    <span className="text-yellow-500 font-bold cursor-pointer" onClick={signInWithGoogle}>
+                    Signup with Google
+                    </span>
                 </h2>
                 </div>
             </div>

@@ -6,7 +6,7 @@ const HeroSection = () => {
     <div>
       {/* use the hero image in this folder */}
       <div className="hero-container">
-        <img src={heroImg} alt="hero" className="w-full h-80" />
+        <img src={heroImg} alt="hero" className="w-full h-1/6" />
       </div>
     </div>
   )

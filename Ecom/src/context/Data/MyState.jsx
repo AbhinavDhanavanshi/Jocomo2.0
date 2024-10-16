@@ -137,36 +137,39 @@ const MyState = (props) => {
 
 
 
-    const updateProduct = async () => {
+    const updateProduct = async (givenProduct) => {
         // Check if product data exists and has an ID
-        if (!products || !products.id) {
-            toast.error("Product data is incomplete");
+        if (!givenProduct || !givenProduct.id) {
+            toast.error(`product data is invalid: ${givenProduct} ${givenProduct.id}`);
             return;
         }
     
         // Check for missing fields
         const requiredFields = ['title', 'price', 'imageUrl', 'category', 'description', 'id', 'time', 'date', 'ownerName', 'ownerContact'];
-        const missingFields = requiredFields.filter(field => !products[field]);
+        const missingFields = requiredFields.filter(field => !givenProduct[field]);
     
         if (missingFields.length > 0) {
             toast.error(`Missing required fields: ${missingFields.join(', ')}`);
             return;
         }
+
+        // change the approved value to false
+        givenProduct.approved = false;
     
         setLoading(true);
     
         try {
             // Update the product in Firestore
-            await setDoc(doc(fireDB, 'products', products.id), products);
+            await setDoc(doc(fireDB, 'products', givenProduct.id), givenProduct);
             toast.success('Product updated successfully');
     
             // Refresh product data
             getProductsData();
     
             // Redirect after successful update
-            setTimeout(() => {
-                window.location.href = '/dashboard'; // Use navigate() if using React Router
-            }, 1500);
+            // setTimeout(() => {
+            //     window.location.href = '/sell'; // Use navigate() if using React Router
+            // }, 1500);
         } catch (error) {
             toast.error(error.message);
         } finally {

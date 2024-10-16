@@ -11,7 +11,7 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import ProductInfo from './pages/productinfo/ProductInfo';
 import AddProduct from './pages/admin/page/AddProduct';
-import UpdateProduct from './pages/admin/page/UpdateProduct';
+import UpdateProduct from './pages/Sell/UpdateProduct';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css'; 
@@ -43,9 +43,9 @@ export default function App() {
             </ProtectedRouteForAdmin>
           } />
           <Route path='/updateproduct' element={
-            <ProtectedRouteForAdmin>
+            <ProtectedRoute>
               <UpdateProduct />
-            </ProtectedRouteForAdmin> 
+            </ProtectedRoute> 
           } />
           <Route path='*' element={<NoPage />} /> 
         </Routes>
