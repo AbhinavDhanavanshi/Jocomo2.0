@@ -35,7 +35,7 @@ export default function App() {
             <ProtectedRoute><Cart /></ProtectedRoute>
           } />
           <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/signup'   element={<Signup />} />
           <Route path='/productinfo/:id' element={<ProductInfo />} />
           <Route path='/addproduct' element={
             <ProtectedRouteForAdmin>
