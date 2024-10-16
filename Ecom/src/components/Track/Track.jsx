@@ -73,7 +73,7 @@ function Track() {
                 <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
                   {" "}
                   {/* Added text-center */}
-                  Buy and Sell products with your college mates
+                  Buy-Sell products with your collegemates
                 </p>
               </div>
             </div>
@@ -107,7 +107,7 @@ function Track() {
                   Sellers
                 </h2>
                 <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
-                    Get Sellers contact details and get your order
+                    Reveal product owner details
                 </p>
               </div>
             </div>
@@ -141,7 +141,7 @@ function Track() {
                   Advertisements
                 </h2>
                 <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
-                  Advertise your products and get more customers
+                  Run ads to get more buyers
                 </p>
               </div>
             </div>
