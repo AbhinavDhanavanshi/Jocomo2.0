@@ -127,6 +127,19 @@ export default function Navbar() {
                       </a>
                     )}
                   </div>
+
+                  {/* <div className="flow-root">
+                    <Link
+                      to="/"
+                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                    >
+                      <img
+                        className="inline-block w-10 h-10 rounded-full"
+                        src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                        alt="Dan_Abromov"
+                      />
+                    </Link>
+                  </div> */}
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
@@ -165,85 +178,135 @@ export default function Navbar() {
             color: mode === "dark" ? "white" : "",
           }}
         >
-          <div className="flex justify-between h-16 items-center">
-            {/* Logo */}
-            <div className="flex lg:ml-0">
-              <Link to={"/"} className="flex">
-                <h1
-                  className="text-2xl font-bold text-black px-2 py-1 rounded"
-                  style={{ color: mode === "dark" ? "white" : "" }}
-                >
-                  JOCOMA
-                </h1>
-              </Link>
-            </div>
-
-            <div className="ml-auto flex items-center space-x-8">
-              {/* Links */}
-              <Link
-                to="/"
-                className="text-sm font-medium text-gray-700"
-                style={{ color: mode === "dark" ? "white" : "" }}
+          <div>
+            <div className="flex h-16 items-center">
+              <button
+                type="button"
+                className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                onClick={() => setOpen(true)}
+                style={{
+                  backgroundColor: mode === "dark" ? "rgb(80 82 87)" : "",
+                  color: mode === "dark" ? "white" : "",
+                }}
               >
-                All Products
-              </Link>
-              {user?.email !== "abhinavbbis@gmail.com" && (
-                <Link
-                  to="/sell"
-                  className="text-sm font-medium text-gray-700"
-                  style={{ color: mode === "dark" ? "white" : "" }}
+                <span className="sr-only">Open menu</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
                 >
-                  Sell
-                </Link>
-              )}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              </button>
 
-              {user?.email === "abhinavbbis@gmail.com" && (
-                <Link
-                  to="/dashboard"
-                  className="text-sm font-medium text-gray-700"
-                  style={{ color: mode === "dark" ? "white" : "" }}
-                >
-                  Admin
+              {/* Logo */}
+              <div className="ml-4 flex lg:ml-0">
+                <Link to={"/"} className="flex">
+                  <div className="flex">
+                    <h1
+                      className="text-2xl font-bold text-black px-2 py-1 rounded"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      JOCOMA
+                    </h1>
+                  </div>
                 </Link>
-              )}
-              {!user ? (
-                <Link
-                  to="/login"
-                  className="text-sm font-medium text-gray-700"
-                  style={{ color: mode === "dark" ? "white" : "" }}
-                >
-                  Login
-                </Link>
-              ) : (
-                <a
-                  onClick={logout}
-                  className="text-sm font-medium text-gray-700 cursor-pointer"
-                  style={{ color: mode === "dark" ? "white" : "" }}
-                >
-                  Logout
-                </a>
-              )}
+              </div>
 
-              {/* Cart */}
-              <Link to="/cart" className="relative">
-                <BsCart
-                  className="h-6 w-6"
-                  style={{ color: mode === "dark" ? "white" : "gray" }}
-                />
-                <span
-                  className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1"
-                  style={{ color: mode === "dark" ? "white" : "black" }}
-                >
-                  {cartItems.length}
+              <div className="ml-auto flex items-center">
+                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6 ml-4">
+                  <Link
+                    to="/"
+                    className="text-sm font-medium text-gray-700"
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    All Products
+                  </Link>
+                  {user?.email !== "abhinavbbis@gmail.com" && (
+                    <Link
+                      to="/sell"
+                      className="text-sm font-medium text-gray-700"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Sell
+                    </Link>
+                  )}
+
+                  {user?.email === "abhinavbbis@gmail.com" && (
+                    <Link
+                      to="/dashboard"
+                      className="text-sm font-medium text-gray-700"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Admin
+                    </Link>
+                  )}
+                  {!user ? (
+                    <Link
+                      to="/login"
+                      className="text-sm font-medium text-gray-700"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Login
+                    </Link>
+                  ) : (
+                    <a
+                      onClick={logout}
+                      className="text-sm font-medium text-gray-700 cursor-pointer"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Logout
+                    </a>
+                  )}
+                </div>
+
+                <span className="hidden lg:ml- lg:flex">
+                  <a
+                    href="/"
+                    className="flex items-center text-gray-700 hover:text-gray-800"
+                  >
+                    {/* india fla */}
+                    <span
+                      className="ml-6 block text-sm font-medium"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      INDIA
+                    </span>
+                  </a>
                 </span>
-              </Link>
 
-              {/* Mode toggle */}
-              <BsFillCloudSunFill
-                onClick={toggleMode}
-                className="text-gray-700 h-6 w-6 cursor-pointer"
-                style={{ color: mode === "dark" ? "white" : "" }}
-              />
+                {/* Mode toggle */}
+                <div className="ml-6">
+                  <BsFillCloudSunFill
+                    onClick={toggleMode}
+                    className="text-gray-700 h-6 w-6 cursor-pointer"
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  />
+                </div>
+
+                {/* Cart */}
+                <div className="ml-6 flex items-center space-x-6">
+                  <Link to="/cart" className="relative">
+                    <BsCart
+                      className="h-6 w-6"
+                      style={{ color: mode === "dark" ? "white" : "gray" }}
+                    />
+                    <span
+                      className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1"
+                      style={{ color: mode === "dark" ? "white" : "black" }}
+                    >
+                      {cartItems.length}
+                    </span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </nav>
