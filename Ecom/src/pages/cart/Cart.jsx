@@ -3,21 +3,20 @@ import myContext from "../../context/Data/MyContext";
 import Layout from "../../components/Layout/Layout";
 import Modal from "../../components/modal/Modal"; // Import Modal component
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { deleteFromCart } from "../../redux/CartSlice";
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 
 function Cart() {
   const context = useContext(myContext);
-  const { mode } = context;
+  const { mode, customToastSuccess, customToastError } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
 
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
-    toast.success("Product removed from cart");
+    customToastSuccess("Product removed from cart");
   };
 
   useEffect(() => {
@@ -44,21 +43,21 @@ function Cart() {
     try {
       const orderDocRef = doc(fireDB, "orders", orderData.orderId); // Unique order ID
       await setDoc(orderDocRef, orderData);
-      toast.success("Order details saved successfully!");
+      customToastSuccess("Order details saved successfully!");
     } catch (error) {
       console.error("Error saving order details: ", error);
-      toast.error("Failed to save order details.");
+      customToastError("Failed to save order details.");
     }
   };
 
   const buyNow = async () => {
     if (isNaN(phoneNumber) || phoneNumber.length !== 10) {
-      return toast.error("Please enter a valid phone number");
+      return customToastError("Please enter a valid phone number");
     }
 
     const userDetails = JSON.parse(localStorage.getItem("user"));
     if (!userDetails) {
-      return toast.error("Please login to continue");
+      return customToastError("Please login to continue");
     }
 
     const orderData = {
@@ -78,8 +77,6 @@ function Cart() {
 
     orderData.orderId = `${userDetails.uid}-${Date.now()}`; // Unique order ID
 
-    console.log("Order data before saving:", orderData); // Debugging line
-
     try {
       const newOwnerDetails = {};
       for (const cartItem of cartItems) {
@@ -93,7 +90,7 @@ function Cart() {
 
           newOwnerDetails[cartItem.id] = { ownerName, ownerContact };
         } else {
-          toast.error(`Product details not found for ${cartItem.title}`);
+          customToastError(`Product details not found for ${cartItem.title}`);
         }
       }
 
@@ -103,7 +100,7 @@ function Cart() {
       await saveOrderDetails(orderData); // Save order details here
     } catch (error) {
       console.error("Error during buy now process: ", error);
-      toast.error("Error during the buy now process");
+      customToastError("Error during the buy now process");
     }
   };
 
