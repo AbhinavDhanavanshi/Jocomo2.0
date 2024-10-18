@@ -28,10 +28,22 @@ export default function Sell({ onClose }) {
 
   // Updated addProduct to include ownerName directly in the function call
   const handleAddProduct = () => {
-    // Pass the ownerName directly into the product object
-    const updatedProduct = { ...products, ownerName: userName };
+    if(!products.title || !products.price || !products.imageUrl || !products.category || !products.description) {
+        return toast.error("Please fill all the fields");
+    }
+
+    if(products.ownerContact.length !== 10) {
+        return toast.error("Contact number must be 10 digits");
+    }
+
+    // Add the ownerName field explicitly
+    const updatedProduct = { 
+        ...products, 
+        ownerName: userName // ensure ownerName is set from the localStorage user
+    };
+
     addProduct(updatedProduct);
-  };
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-gray-800 bg-opacity-30 overflow-auto">

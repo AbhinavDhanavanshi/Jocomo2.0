@@ -66,8 +66,9 @@ function UpdateProduct({ onClose, selectedProduct }) {
               setUpdatedProduct({ ...updatedProduct, title: e.target.value })
             }
             name="title"
-            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
+            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none cursor-not-allowed"
             placeholder="Product title"
+            disabled
           />
         </div>
         <div>
@@ -90,8 +91,9 @@ function UpdateProduct({ onClose, selectedProduct }) {
               setUpdatedProduct({ ...updatedProduct, imageUrl: e.target.value })
             }
             name="imageurl"
-            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
+            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none cursor-not-allowed"
             placeholder="Product image URL"
+            disabled
           />
         </div>
         <div>
@@ -148,8 +150,9 @@ function UpdateProduct({ onClose, selectedProduct }) {
               })
             }
             name="OwnerContact"
-            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
+            className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none cursor-not-allowed"
             placeholder="Owner Contact"
+            disabled
           />
         </div>
         <div>

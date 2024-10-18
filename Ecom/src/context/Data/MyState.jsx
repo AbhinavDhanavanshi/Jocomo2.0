@@ -54,7 +54,8 @@ const MyState = (props) => {
         setLoading(true)
         try{
             const productRef = collection(fireDB, 'products')
-            await addDoc(productRef, updatedProduct)
+            toast.info('Product added by' + updatedProduct.ownerName);
+            await addDoc(productRef, {...updatedProduct,});
             toast.success('Product added successfully')
             getProductsData()
             // empty all fields and navigate to admin page
@@ -77,9 +78,6 @@ const MyState = (props) => {
                     }
                 ),
             })
-            setTimeout(()=>{
-                window.location.href = '/sell'
-            }, 1500)
             setLoading(false)
         }
         catch(err){
@@ -137,39 +135,33 @@ const MyState = (props) => {
 
 
 
-    const updateProduct = async (givenProduct) => {
+    const updateProduct = async (updatedProduct) => {
         // Check if product data exists and has an ID
-        if (!givenProduct || !givenProduct.id) {
-            toast.error(`product data is invalid: ${givenProduct} ${givenProduct.id}`);
+        if (!updatedProduct || !updatedProduct.id) {
+            toast.error("Product data is incomplete");
             return;
         }
     
         // Check for missing fields
         const requiredFields = ['title', 'price', 'imageUrl', 'category', 'description', 'id', 'time', 'date', 'ownerName', 'ownerContact'];
-        const missingFields = requiredFields.filter(field => !givenProduct[field]);
+        const missingFields = requiredFields.filter(field => !updatedProduct[field]);
     
         if (missingFields.length > 0) {
             toast.error(`Missing required fields: ${missingFields.join(', ')}`);
             return;
         }
-
-        // change the approved value to false
-        givenProduct.approved = false;
     
         setLoading(true);
     
         try {
             // Update the product in Firestore
-            await setDoc(doc(fireDB, 'products', givenProduct.id), givenProduct);
+            await setDoc(doc(fireDB, 'products', updatedProduct.id), updatedProduct);
             toast.success('Product updated successfully');
     
             // Refresh product data
             getProductsData();
     
-            // Redirect after successful update
-            // setTimeout(() => {
-            //     window.location.href = '/sell'; // Use navigate() if using React Router
-            // }, 1500);
+            toast.success('Product updated successfully');
         } catch (error) {
             toast.error(error.message);
         } finally {
