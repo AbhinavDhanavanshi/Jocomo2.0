@@ -54,7 +54,7 @@ function Filter() {
                     <p className="font-medium text-xs">Filters</p> 
                     <button
                         onClick={() => ResetFilter()}
-                        className="px-2 py-1 bg-gray-50 hover:bg-gray-200 text-gray-800 text-xs font-medium rounded-md"
+                        className="px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white text-xs font-small rounded-md"
                         style={{ color: mode === 'dark' ? 'white' : '' }}
                     >
                         Reset Filter
