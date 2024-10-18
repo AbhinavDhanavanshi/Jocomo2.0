@@ -43,6 +43,7 @@ export default function Sell({ onClose }) {
     };
 
     addProduct(updatedProduct);
+    onClose();
 };
 
   return (

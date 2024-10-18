@@ -32,6 +32,10 @@ function ProductCard() {
     setUpdateOn(false);
   };
 
+  const userProducts = product.filter((item) => item.ownerName === user);
+
+
+
   return (
     <Layout>
       <section className={`text-gray-600 body-font ${sellOn ? "blur-sm" : ""}`}>
@@ -57,11 +61,9 @@ function ProductCard() {
           </div>
 
           <div className="flex flex-wrap -m-4">
-            {product.map((item, index) => {
+            {userProducts.map((item, index) => {
               const { title, price, imageUrl, approved } = item;
-              if (!approved || item.ownerName !== user) {
-                return null;
-              }
+              
               return (
                 <div className="p-4 md:w-1/4 drop-shadow-lg" key={index}>
                   <div
