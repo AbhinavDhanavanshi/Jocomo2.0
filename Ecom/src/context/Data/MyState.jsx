@@ -24,14 +24,15 @@ const MyState = (props) => {
       closeOnClick: false, // Prevent closing when clicking the toast itself
     });
 
-    // Function to handle screen click and dismiss toast
-    const handleClick = () => {
-      toast.dismiss(toastId); // Close the toast
-      document.removeEventListener("click", handleClick); // Remove listener after toast is dismissed
-    };
+    // Add a slight delay before attaching the click event listener
+    setTimeout(() => {
+      const handleClick = () => {
+        toast.dismiss(toastId); // Close the toast
+        document.removeEventListener("click", handleClick); // Remove listener after toast is dismissed
+      };
 
-    // Add event listener to close the toast when clicking anywhere on the screen
-    document.addEventListener("click", handleClick);
+      document.addEventListener("click", handleClick);
+    }, 200); // 200ms delay
   };
 
   const customToastError = (message) => {
@@ -41,14 +42,15 @@ const MyState = (props) => {
       closeOnClick: false, // Prevent closing when clicking the toast itself
     });
 
-    // Function to handle screen click and dismiss toast
-    const handleClick = () => {
-      toast.dismiss(toastId); // Close the toast
-      document.removeEventListener("click", handleClick); // Remove listener after toast is dismissed
-    };
+    // Add a slight delay before attaching the click event listener
+    setTimeout(() => {
+      const handleClick = () => {
+        toast.dismiss(toastId); // Close the toast
+        document.removeEventListener("click", handleClick); // Remove listener after toast is dismissed
+      };
 
-    // Add event listener to close the toast when clicking anywhere on the screen
-    document.addEventListener("click", handleClick);
+      document.addEventListener("click", handleClick);
+    }, 200); // 200ms delay
   };
 
   const [mode, setMode] = React.useState("light");
