@@ -8,7 +8,14 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
+            // Check if the item is already in the cart
+            const existingItemIndex = state.findIndex(item => item.id === action.payload.id);
+            if (existingItemIndex !== -1) {
+                toast.error('Item is already in the cart');
+                return;
+            }
             state.push(action.payload);
+            toast.success('Item added to cart');
             localStorage.setItem('cart', JSON.stringify(state)); // Update localStorage
         },
         deleteFromCart(state, action) {

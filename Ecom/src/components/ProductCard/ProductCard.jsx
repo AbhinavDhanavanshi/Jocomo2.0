@@ -15,7 +15,6 @@ function ProductCard() {
         const { ownerName, ownerContact, ...safeProduct } = product;
         
         dispatch(addToCart(safeProduct));
-        toast.success('Added to cart');
     };
 
     useEffect(() => {
