@@ -8,8 +8,6 @@ function Track() {
   const context = useContext(myContext);
   const { mode } = context;
 
-//   const arrowColor = mode === "dark" ? "white" : "black"; // Set arrow color based on mode
-
   const settings = {
     dots: true,
     infinite: true,
@@ -41,10 +39,8 @@ function Track() {
         <div className="container px-5 md:py-5 mx-auto">
           <Slider {...settings}>
             <div className="p-4 flex justify-center">
-              {" "}
-              {/* Center alignment for items */}
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center" // Added flex and items-center
+                className="border-2 hover:scale-105 transition-transform duration-300 border-gray-200 bg-gray-100 px-4 py-4 rounded-lg flex flex-col items-center"
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
@@ -70,9 +66,7 @@ function Track() {
                 >
                   Your Marketplace
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
-                  {" "}
-                  {/* Added text-center */}
+                <p className="leading-relaxed text-sm text-center">
                   Buy-Sell products with your collegemates
                 </p>
               </div>
@@ -80,7 +74,7 @@ function Track() {
 
             <div className="p-4 flex justify-center">
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center"
+                className="border-2 hover:scale-105 transition-transform duration-300 border-gray-200 bg-gray-100 px-4 py-4 rounded-lg flex flex-col items-center"
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
@@ -106,15 +100,15 @@ function Track() {
                 >
                   Sellers
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
-                    Reveal product owner details
+                <p className="leading-relaxed text-sm text-center">
+                  Reveal product owner details
                 </p>
               </div>
             </div>
 
             <div className="p-4 flex justify-center">
               <div
-                className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-4 rounded-lg flex flex-col items-center"
+                className="border-2 hover:scale-105 transition-transform duration-300 border-gray-200 bg-gray-100 px-4 py-4 rounded-lg flex flex-col items-center"
                 style={{
                   backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
                   color: mode === "dark" ? "white" : "",
@@ -140,7 +134,7 @@ function Track() {
                 >
                   Advertisements
                 </h2>
-                <p className="leading-relaxed text-sm overflow-hidden text-ellipsis whitespace-nowrap text-center">
+                <p className="leading-relaxed text-sm text-center">
                   Run ads to get more buyers
                 </p>
               </div>

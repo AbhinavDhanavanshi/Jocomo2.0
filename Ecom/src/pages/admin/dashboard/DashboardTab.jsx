@@ -23,7 +23,7 @@ function DashboardTab() {
 
 
     const goToAdd = () => {
-        window.location.href = '/addproduct'
+        window.location.href = '/sell'
     }
 
     return (
