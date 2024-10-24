@@ -229,7 +229,7 @@ export default function Navbar() {
                   >
                     All Products
                   </Link>
-                  {user?.email !== "abhinavbbis@gmail.com" && (
+                  {/* {user?.email !== "abhinavbbis@gmail.com" && (
                     <Link
                       to="/sell"
                       className="text-sm font-medium text-gray-700"
@@ -237,7 +237,7 @@ export default function Navbar() {
                     >
                       Sell
                     </Link>
-                  )}
+                  )} */}
 
                   {user?.email === "abhinavbbis@gmail.com" && (
                     <Link
@@ -282,8 +282,20 @@ export default function Navbar() {
                   </a>
                 </span>
 
+                {user && user?.email !== "abhinavbbis@gmail.com" && (
+                  <div className="ml-4 low-root">
+                    <Link
+                      to="/sell"
+                      className=" block p-2 font-bold text-blue-500"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Sell
+                    </Link>
+                  </div>
+                )}
+
                 {/* Mode toggle */}
-                <div className="ml-6">
+                <div className="ml-4">
                   <BsFillCloudSunFill
                     onClick={toggleMode}
                     className="text-gray-700 h-6 w-6 cursor-pointer"
@@ -292,7 +304,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Cart */}
-                <div className="ml-6 flex items-center space-x-6">
+                <div className="ml-5 flex items-center space-x-6">
                   <Link to="/cart" className="relative">
                     <BsCart
                       className="h-6 w-6"
