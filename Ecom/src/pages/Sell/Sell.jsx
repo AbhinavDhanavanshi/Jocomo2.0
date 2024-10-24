@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { toast } from "react-toastify";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import MyContext from "../../context/Data/MyContext";
 
 export default function Sell({ onClose }) {
+  const [imageFile, setImageFile] = useState(null); // State to hold the image file
+  const [uploading, setUploading] = useState(false); // State to show upload progress
   const context = useContext(MyContext);
   const { products, setProducts, addProduct } = context;
   const categories = [
@@ -26,11 +29,55 @@ export default function Sell({ onClose }) {
     : null;
   const userName = user ? user.name : "Unknown User"; // Fallback in case user is not available
 
-  // Updated addProduct to include ownerName directly in the function call
-  const handleAddProduct = () => {
-    // Pass the ownerName directly into the product object
-    const updatedProduct = { ...products, ownerName: userName };
+  // Handle the file input change to select the image file
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+    }
+  };
+
+  // Handle uploading the image to Firebase Storage
+  const handleImageUpload = async () => {
+    if (!imageFile) {
+      toast.error("Please select an image file to upload.");
+      return;
+    }
+
+    setUploading(true); // Set uploading state to true
+    const storage = getStorage();
+    const storageRef = ref(storage, `productImages/${imageFile.name}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Optional: handle progress here
+      },
+      (error) => {
+        setUploading(false);
+        toast.error("Image upload failed. Please try again.");
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          handleAddProduct(downloadURL); // Call function to add product with image URL
+          setUploading(false);
+        });
+      }
+    );
+  };
+
+  // Updated addProduct to include ownerName and imageUrl directly in the function call
+  const handleAddProduct = (imageUrl) => {
+    // Add imageUrl to the product object
+    const updatedProduct = {
+      ...products,
+      ownerName: userName,
+      imageUrl, // URL generated from Firebase Storage
+    };
     addProduct(updatedProduct);
+    toast.success("Product added successfully!");
   };
 
   return (
@@ -40,7 +87,7 @@ export default function Sell({ onClose }) {
         style={{
           maxHeight: "90vh", // Ensure the modal doesn't exceed 90% of the viewport height
           overflowY: "auto",
-          scrollbarWidth: "none", 
+          scrollbarWidth: "none",
         }}
       >
         <button
@@ -76,18 +123,17 @@ export default function Sell({ onClose }) {
             placeholder="Product price"
           />
         </div>
+        
+        {/* File input for image upload */}
         <div>
           <input
-            type="url"
-            value={products.imageUrl || ""}
-            onChange={(e) =>
-              setProducts({ ...products, imageUrl: e.target.value })
-            }
-            name="imageurl"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white placeholder:text-gray-200 outline-none"
-            placeholder="Product imageUrl"
           />
         </div>
+
         <div>
           <select
             value={products.category || ""}
@@ -97,7 +143,7 @@ export default function Sell({ onClose }) {
             name="category"
             className="bg-gray-600 mb-4 px-2 py-2 w-full rounded-lg text-white outline-none"
           >
-            <option value="" disabled selected hidden>
+            <option value="" disabled hidden>
               Select Category
             </option>
             {categories.map((category) => (
@@ -144,12 +190,16 @@ export default function Sell({ onClose }) {
             placeholder="Product Description"
           ></textarea>
         </div>
+
         <div className="flex justify-center mb-3 group">
           <button
-            onClick={handleAddProduct}
-            className="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 group-hover:scale-105 transition-all ease-in-out 3s focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2"
+            onClick={handleImageUpload} // Call the upload function on button click
+            disabled={uploading} // Disable button during upload
+            className={`focus:outline-none text-white ${
+              uploading ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+            } group-hover:scale-105 transition-all ease-in-out 3s focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm w-full py-2`}
           >
-            Add
+            {uploading ? "Uploading..." : "Add"}
           </button>
         </div>
       </div>
