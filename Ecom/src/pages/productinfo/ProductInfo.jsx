@@ -44,7 +44,6 @@ function ProductInfo() {
 
     // Dynamic class names based on mode
     const containerClass = mode === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900';
-    const buttonClass = mode === 'dark' ? 'bg-blue-500 hover:bg-blue-700' : 'bg-indigo-500 hover:bg-indigo-600';
     
     return (
         <Layout>
@@ -68,7 +67,7 @@ function ProductInfo() {
                                     <span className="title-font font-medium text-2xl">
                                         ₹{products.price}
                                     </span>
-                                    <button onClick={() => addCart(products)} className={`flex ml-auto border-0 py-2 px-6 focus:outline-none rounded ${buttonClass}`}>
+                                    <button onClick={() => addCart(products)} className={`flex ml-auto border-0 text-white py-2 px-6 focus:outline-none rounded bg-blue-500 hover:bg-blue-700 hover:scale-105 transition-all ease-in-out 300`}>
                                         Add To Cart
                                     </button>
                                 </div>
