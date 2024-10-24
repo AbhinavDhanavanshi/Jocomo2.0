@@ -77,7 +77,7 @@ export default function Sell({ onClose }) {
       imageUrl, // URL generated from Firebase Storage
     };
     addProduct(updatedProduct);
-    toast.success("Product added successfully!");
+    toast.success("Product added successfully! It will be visible once approved.");
   };
 
   return (

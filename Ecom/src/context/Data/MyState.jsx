@@ -103,7 +103,6 @@ const MyState = (props) => {
     try {
       const productRef = collection(fireDB, "products");
       await addDoc(productRef, { ...updatedProduct });
-      customToastSuccess("Product added successfully");
       getProductsData();
       // empty all fields and navigate to admin page
       setProducts({
