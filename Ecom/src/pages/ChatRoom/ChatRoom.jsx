@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FaArrowDown } from "react-icons/fa";
 import {
   getDatabase,
   ref,
@@ -8,19 +9,21 @@ import {
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import Layout from "../../components/Layout/Layout";
-import { format } from "date-fns"; // Install date-fns for formatting dates
+import { format } from "date-fns";
 
 const ChatPage = () => {
   const [groupedMessages, setGroupedMessages] = useState({});
   const [newMessage, setNewMessage] = useState("");
+  const [isAtBottom, setIsAtBottom] = useState(true);
   const db = getDatabase();
   const auth = getAuth();
   const user = auth.currentUser;
+  const messagesContainerRef = useRef(null); // Ref for messages container
 
   useEffect(() => {
     const messagesRef = ref(db, "messages");
 
-    onValue(messagesRef, (snapshot) => {
+    const unsubscribe = onValue(messagesRef, (snapshot) => {
       const data = snapshot.val();
       const groupedData = {};
 
@@ -29,7 +32,7 @@ const ChatPage = () => {
         const messageDate = format(
           new Date(message.timestamp || Date.now()),
           "yyyy-MM-dd"
-        ); // Format as 'YYYY-MM-DD'
+        );
 
         if (!groupedData[messageDate]) {
           groupedData[messageDate] = [];
@@ -39,7 +42,16 @@ const ChatPage = () => {
 
       setGroupedMessages(groupedData);
     });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
   }, [db]);
+
+  useEffect(() => {
+    // Scroll to bottom only if the user is at the bottom
+    if (isAtBottom) {
+      scrollToBottom();
+    }
+  }, [groupedMessages, isAtBottom]); // Scroll when messages change
 
   const handleSendMessage = () => {
     const messagesRef = ref(db, "messages");
@@ -50,21 +62,40 @@ const ChatPage = () => {
         timestamp: serverTimestamp(),
       });
       setNewMessage("");
+      // Scroll to bottom only if the user is at the bottom
+      if (isAtBottom) {
+        scrollToBottom();
+      }
     }
+  };
+
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
+    }
+  };
+
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = messagesContainerRef.current;
+    // Check if user is at the bottom
+    setIsAtBottom(scrollHeight - scrollTop <= clientHeight + 1);
   };
 
   return (
     <Layout>
-      <div className="flex flex-col h-[80vh] bg-white">
-        <div className="flex-1 overflow-y-scroll p-4">
+      <div className="flex flex-col h-[80vh] bg-white relative">
+        <div
+          ref={messagesContainerRef}
+          onScroll={handleScroll} // Add scroll event listener
+          className="flex-1 overflow-y-scroll p-4 scrollbar-hide"
+        >
           <div className="space-y-4">
             {Object.keys(groupedMessages).map((date) => (
               <div key={date}>
-                {/* Date Header */}
                 <div className="text-center text-gray-500 mb-2">
-                  {format(new Date(date), "EEEE, MMMM d, yyyy")} {/* e.g., Monday, January 1, 2023 */}
+                  {format(new Date(date), "EEEE, MMMM d, yyyy")}
                 </div>
-                {/* Messages for that date */}
                 {groupedMessages[date].map((msg) => (
                   <div
                     key={msg.id}
@@ -106,6 +137,12 @@ const ChatPage = () => {
           >
             Send
           </button>
+          <div className="flex justify-center items-center ml-2 w-10 h-10 bg-blue-500 rounded-full shadow-lg hover:bg-blue-600 transition duration-200 cursor-pointer">
+            <FaArrowDown
+              className="text-white text-lg"
+              onClick={scrollToBottom}
+            />
+          </div>
         </div>
       </div>
     </Layout>
