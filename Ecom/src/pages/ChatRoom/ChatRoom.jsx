@@ -10,6 +10,7 @@ import {
 import { getAuth } from "firebase/auth";
 import Layout from "../../components/Layout/Layout";
 import { format } from "date-fns";
+import Navbar from "../../components/Navbar/NavBar";
 
 const ChatPage = () => {
   const [groupedMessages, setGroupedMessages] = useState({});
@@ -83,8 +84,9 @@ const ChatPage = () => {
   };
 
   return (
-    <Layout>
-      <div className="flex flex-col h-[80vh] bg-white relative">
+    <div>
+      <Navbar />
+      <div className="flex flex-col h-[84vh] bg-white relative">
         <div
           ref={messagesContainerRef}
           onScroll={handleScroll} // Add scroll event listener
@@ -145,7 +147,7 @@ const ChatPage = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
