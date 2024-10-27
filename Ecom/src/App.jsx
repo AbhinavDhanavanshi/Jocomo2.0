@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css'; 
+import ChatRoom from './pages/ChatRoom/ChatRoom';
 
 
 export default function App() {
@@ -34,6 +35,11 @@ export default function App() {
           } />
           <Route path='/cart' element={
             <ProtectedRoute><Cart /></ProtectedRoute>
+          } />
+          <Route path='/chat' element={
+            <ProtectedRoute>
+              <ChatRoom />
+            </ProtectedRoute>
           } />
           <Route path='/login' element={<Login />} />
           <Route path='/signup'   element={<Signup />} />

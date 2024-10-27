@@ -13,6 +13,8 @@
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^2.1.5",
     "@reduxjs/toolkit": "^2.2.8",
+    "daisyui": "^4.12.13",
+    "date-fns": "^4.1.0",
     "firebase": "^10.14.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",

@@ -1,14 +1,13 @@
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { BsFillCloudSunFill } from "react-icons/bs";
-import { FiSun } from "react-icons/fi";
+import { BsFillCloudSunFill, BsCart } from "react-icons/bs";
+import { FaComments } from "react-icons/fa";
 import MyContext from "../../context/Data/MyContext";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/FirebaseConfig";
-import { BsCart } from "react-icons/bs";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,7 +18,7 @@ export default function Navbar() {
   const logout = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem("user");
+      localStorage.clear();
       window.location.href = "/";
     } catch (error) {
       console.error("Error during sign out:", error);
@@ -128,6 +127,15 @@ export default function Navbar() {
                     )}
                   </div>
 
+                  {/* Mode toggle */}
+                  <div className>
+                    <BsFillCloudSunFill
+                      onClick={toggleMode}
+                      className="text-gray-700 h-6 w-6 cursor-pointer"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    />
+                  </div>
+
                   {/* <div className="flow-root">
                     <Link
                       to="/"
@@ -140,17 +148,6 @@ export default function Navbar() {
                       />
                     </Link>
                   </div> */}
-                </div>
-
-                <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="/" className="-m-2 flex items-center p-2">
-                    <span
-                      className="ml-3 block text-base font-medium text-gray-900"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      INDIA
-                    </span>
-                  </a>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -265,22 +262,16 @@ export default function Navbar() {
                       Logout
                     </a>
                   )}
-                </div>
 
-                <span className="hidden lg:ml- lg:flex">
-                  <a
-                    href="/"
-                    className="flex items-center text-gray-700 hover:text-gray-800"
-                  >
-                    {/* india fla */}
-                    <span
-                      className="ml-6 block text-sm font-medium"
+                  {/* Mode toggle */}
+                  <div className="ml-4">
+                    <BsFillCloudSunFill
+                      onClick={toggleMode}
+                      className="text-gray-700 h-6 w-6 cursor-pointer"
                       style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      INDIA
-                    </span>
-                  </a>
-                </span>
+                    />
+                  </div>
+                </div>
 
                 {user && user?.email !== "abhinavbbis@gmail.com" && (
                   <div className="ml-4 low-root">
@@ -294,10 +285,9 @@ export default function Navbar() {
                   </div>
                 )}
 
-                {/* Mode toggle */}
                 <div className="ml-4">
-                  <BsFillCloudSunFill
-                    onClick={toggleMode}
+                  <FaComments
+                    onClick={() => (window.location.href = "/chat")}
                     className="text-gray-700 h-6 w-6 cursor-pointer"
                     style={{ color: mode === "dark" ? "white" : "" }}
                   />
