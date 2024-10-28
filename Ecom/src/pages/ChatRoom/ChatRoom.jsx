@@ -86,7 +86,7 @@ const ChatPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col h-[84vh] bg-white relative">
+      <div className="flex flex-col h-[85.1vh] bg-white relative">
         <div
           ref={messagesContainerRef}
           onScroll={handleScroll} // Add scroll event listener
