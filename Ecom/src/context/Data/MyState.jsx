@@ -252,7 +252,6 @@ const MyState = (props) => {
       });
 
       setOrder(ordersArray);
-      console.log("Orders fetched:", ordersArray);
     } catch (error) {
       console.error("Error fetching orders:", error); // Improved error logging
       customToastError("Failed to fetch orders. Please try again.");
@@ -278,7 +277,6 @@ const MyState = (props) => {
 
       setUser(usersArray);
       setLoading(false);
-      console.log(usersArray);
     } catch (error) {
       console.log(error);
       setLoading(false);

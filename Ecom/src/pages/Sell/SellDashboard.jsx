@@ -10,7 +10,7 @@ function ProductCard() {
   const context = useContext(myContext);
   const { mode, product, deleteProduct } = context;
   const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")).name
+    ? JSON.parse(localStorage.getItem("user")).displayName
     : null;
 
   const [sellOn, setSellOn] = useState(false);
